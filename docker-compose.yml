@@ -80,6 +80,7 @@ services:
         ipv4_address: 10.2.0.100
   squid:
     image: alatas/squid-alpine-ssl:latest
+    container_name: squid
     environment:
       - CN=squid.local
       - O=squid
