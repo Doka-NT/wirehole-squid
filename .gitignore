@@ -3,3 +3,8 @@ unbound/*
 etc-pihole/
 etc-dnsmasq.d/
 !unbound/unbound.conf
+var/
+.idea
+.vscode/
+*.der
+*.pem

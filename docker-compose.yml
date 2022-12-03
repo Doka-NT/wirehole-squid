@@ -78,3 +78,15 @@ services:
     networks:
       private_network:
         ipv4_address: 10.2.0.100
+  squid:
+    # build: .
+    image: zout84/squid-cache-with-https:latest
+    volumes:
+      - './squid/conf:/usr/local/squid/etc'
+      - './var/squid/logs:/usr/local/squid/var/logs'
+    ports:
+      - '3128:3128'
+    restart: unless-stopped
+    networks:
+      private_network:
+        ipv4_address: 10.2.0.4
