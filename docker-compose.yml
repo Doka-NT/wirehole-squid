@@ -79,14 +79,19 @@ services:
       private_network:
         ipv4_address: 10.2.0.100
   squid:
-    # build: .
-    image: zout84/squid-cache-with-https:latest
-    volumes:
-      - './squid/conf:/usr/local/squid/etc'
-      - './var/squid/logs:/usr/local/squid/var/logs'
+    image: alatas/squid-alpine-ssl:latest
+    environment:
+      - CN=squid.local
+      - O=squid
+      - OU=squid
+      - C=US
     ports:
-      - '3128:3128'
+      - "3128:3128"
+      - "4128:4128"
+    volumes:
+      - ./squid/conf/squid.conf:/etc/squid/squid.conf
+      - ./squid/conf/user-block-list.txt:/etc/squid/user-block-list.txt
+      - ./var/squid/cache:/var/cache
+      - ./var/squid/cert:/etc/squid-cert
+      - ./var/squid/logs:/var/log/
     restart: unless-stopped
-    networks:
-      private_network:
-        ipv4_address: 10.2.0.4
